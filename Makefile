@@ -115,7 +115,6 @@ build: make_build_args
 		-t $(REPO_HUB)/$(NAME):$(TAGNAME) .
 
 push: print_version
-		docker tag  $(NAME):$(VERSION) $(REPO_HUB)/$(NAME):$(TAGNAME)
 		docker push $(REPO_HUB)/$(NAME):$(TAGNAME)
 
 prod: print_version
