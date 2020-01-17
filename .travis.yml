@@ -22,16 +22,11 @@ before_install:
     cp "shellcheck-${scversion}/shellcheck" /usr/local/bin/
     shellcheck --version
 
-install:
+script:
   - make
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - make hub
 
-deploy:
-  provider: script
-  script: make hub
-  on:
-    repo: jinwoo/influxdb
-    tags: true
-    
-after_failure: docker ps
+
+
+after_failure: docker ps -a

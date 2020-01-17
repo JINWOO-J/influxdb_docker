@@ -122,7 +122,6 @@ prod: print_version
 		docker push $(REPO_HUB)/$(NAME):$(VERSION)
 
 push_hub: print_version
-		#docker tag  $(NAME):$(VERSION) $(REPO_HUB)/$(NAME):$(VERSION)
 		docker push $(REPO_HUB)/$(NAME):$(TAGNAME)
 
 tag_latest: print_version
