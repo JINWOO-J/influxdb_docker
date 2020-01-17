@@ -27,4 +27,11 @@ install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - make hub
 
-#after_failure: docker logs
+deploy:
+  provider: script
+  script: make hub
+  on:
+    repo: jinwoo/influxdb
+    tags: true
+    
+after_failure: docker ps
