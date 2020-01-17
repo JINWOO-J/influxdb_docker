@@ -25,6 +25,6 @@ before_install:
 install:
   - make
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - make push
+  - make hub
 
 #after_failure: docker logs
