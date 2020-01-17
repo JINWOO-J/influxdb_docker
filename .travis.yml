@@ -1,0 +1,29 @@
+language: python
+python:
+  - "3.7"
+
+services:
+  - docker
+
+env:  # N times sandboxes created and built by jobs
+  global:
+    - IS_LOCAL=false
+
+branches:
+  only:
+    - master
+    - devel
+
+before_install:
+  - curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 && chmod +x container-structure-test-linux-amd64 && sudo mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
+  - >
+    scversion="stable" # or "v0.4.7", or "latest"
+    wget -qO- "https://storage.googleapis.com/shellcheck/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv
+    cp "shellcheck-${scversion}/shellcheck" /usr/local/bin/
+    shellcheck --version
+
+install:
+  - make
+  - make push
+
+#after_failure: docker logs
